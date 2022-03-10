@@ -5,6 +5,14 @@ import MenuItem from "@mui/material/MenuItem";
 import Stack from "@mui/material/Stack";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
+import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
+import { useDispatch, useSelector } from "react-redux";
+
+import { setFilter } from "./mainSlice";
+import { actions } from "./sagas";
 
 const statusItems = [
   { name: "Any", value: "" },
@@ -22,13 +30,37 @@ const genderItems = [
 ];
 
 export default function Filter() {
+  const dispatch = useDispatch();
+
+  const filter = useSelector((state) => state.main.filter);
+
+  const handleOnChange = (e) => {
+    dispatch(setFilter({ name: e.target.name, value: e.target.value }));
+  };
+
   return (
     <Paper elevation={2} sx={{ p: 2 }}>
       <Stack spacing={1}>
-        <TextField label="Name" />
+        <Typography variant="h5" sx={{ lineHeight: 1 }}>
+          Filters
+        </Typography>
+        <Divider />
+        <Box sx={{ height: 1 }}></Box>
+        <TextField
+          label="Name"
+          name="name"
+          onChange={handleOnChange}
+          value={filter.name}
+        />
         <FormControl>
           <InputLabel id="status-label">Status</InputLabel>
-          <Select label="Status" labelId="status-label" value="">
+          <Select
+            name="status"
+            label="Status"
+            labelId="status-label"
+            onChange={handleOnChange}
+            value={filter.status}
+          >
             {statusItems.map((item, index) => (
               <MenuItem key={index} value={item.value}>
                 {item.name}
@@ -36,11 +68,27 @@ export default function Filter() {
             ))}
           </Select>
         </FormControl>
-        <TextField label="Species" />
-        <TextField label="Type" />
+        <TextField
+          label="Species"
+          name="species"
+          onChange={handleOnChange}
+          value={filter.species}
+        />
+        <TextField
+          label="Type"
+          name="type"
+          onChange={handleOnChange}
+          value={filter.type}
+        />
         <FormControl>
           <InputLabel id="gender-label">Gender</InputLabel>
-          <Select label="Gender" labelId="gender-label" value="">
+          <Select
+            label="Gender"
+            labelId="gender-label"
+            name="gender"
+            onChange={handleOnChange}
+            value={filter.gender}
+          >
             {genderItems.map((item, index) => (
               <MenuItem key={index} value={item.value}>
                 {item.name}
@@ -48,6 +96,15 @@ export default function Filter() {
             ))}
           </Select>
         </FormControl>
+        <Box sx={{ height: 10 }}></Box>
+        <Button
+          variant="contained"
+          onClick={() => {
+            dispatch(actions.getCharacters());
+          }}
+        >
+          Filter
+        </Button>
       </Stack>
     </Paper>
   );

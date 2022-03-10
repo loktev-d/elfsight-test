@@ -1,4 +1,4 @@
-import { call, put, takeLatest, all } from "redux-saga/effects";
+import { call, put, takeLatest, all, select } from "redux-saga/effects";
 
 import * as api from "./api";
 import { setCharactersAndPages, setPageCount } from "./mainSlice";
@@ -9,12 +9,14 @@ const sagaTypes = {
 };
 
 export const actions = {
-  getCharacters: (payload) => ({ type: sagaTypes.getCharacters, payload }),
+  getCharacters: () => ({ type: sagaTypes.getCharacters }),
   getPage: (payload) => ({ type: sagaTypes.getPage, payload }),
 };
 
-function* getCharacters(action) {
-  const res = yield call(api.fetchCharacters, action.payload);
+function* getCharacters() {
+  const filter = yield select((state) => state.main.filter);
+  const res = yield call(api.fetchCharacters, filter);
+
   yield put(
     setCharactersAndPages({
       characters: res.data.results.map((item) => ({
