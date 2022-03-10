@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   characters: [],
   pageCount: 0,
+  currentPage: 0,
   nextPageUrl: "",
   prevPageUrl: "",
   filter: {
@@ -29,9 +30,16 @@ const mainSlice = createSlice({
     setFilter: (state, { payload }) => {
       state.filter[payload.name] = payload.value;
     },
+    setCurrentPage: (state, { payload }) => {
+      state.currentPage = payload;
+    },
   },
 });
 
-export const { setCharactersAndPages, setPageCount, setFilter } =
-  mainSlice.actions;
+export const {
+  setCharactersAndPages,
+  setPageCount,
+  setFilter,
+  setCurrentPage,
+} = mainSlice.actions;
 export default mainSlice.reducer;

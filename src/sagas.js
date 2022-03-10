@@ -1,7 +1,11 @@
 import { call, put, takeLatest, all, select } from "redux-saga/effects";
 
 import * as api from "./api";
-import { setCharactersAndPages, setPageCount } from "./mainSlice";
+import {
+  setCharactersAndPages,
+  setPageCount,
+  setCurrentPage,
+} from "./mainSlice";
 
 const sagaTypes = {
   getCharacters: "saga/getCharacters",
@@ -32,6 +36,7 @@ function* getCharacters() {
     })
   );
   yield put(setPageCount(res.data.info.pages));
+  yield put(setCurrentPage(1));
 }
 
 function* watchGetCharacters() {
