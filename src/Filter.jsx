@@ -29,8 +29,10 @@ export default function Filter() {
         <FormControl>
           <InputLabel id="status-label">Status</InputLabel>
           <Select label="Status" labelId="status-label" value="">
-            {statusItems.map((item) => (
-              <MenuItem value={item.value}>{item.name}</MenuItem>
+            {statusItems.map((item, index) => (
+              <MenuItem key={index} value={item.value}>
+                {item.name}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
@@ -39,8 +41,10 @@ export default function Filter() {
         <FormControl>
           <InputLabel id="gender-label">Gender</InputLabel>
           <Select label="Gender" labelId="gender-label" value="">
-            {genderItems.map((item) => (
-              <MenuItem value={item.value}>{item.name}</MenuItem>
+            {genderItems.map((item, index) => (
+              <MenuItem key={index} value={item.value}>
+                {item.name}
+              </MenuItem>
             ))}
           </Select>
         </FormControl>
