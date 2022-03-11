@@ -4,8 +4,6 @@ const initialState = {
   characters: [],
   pageCount: 0,
   currentPage: 0,
-  nextPageUrl: "",
-  prevPageUrl: "",
   filter: {
     name: "",
     status: "",
@@ -19,10 +17,8 @@ const mainSlice = createSlice({
   name: "main",
   initialState,
   reducers: {
-    setCharactersAndPages: (state, { payload }) => {
-      state.characters = payload.characters;
-      state.nextPageUrl = payload.next;
-      state.prevPageUrl = payload.prev;
+    setCharacters: (state, { payload }) => {
+      state.characters = payload;
     },
     setPageCount: (state, { payload }) => {
       state.pageCount = payload;
@@ -36,10 +32,6 @@ const mainSlice = createSlice({
   },
 });
 
-export const {
-  setCharactersAndPages,
-  setPageCount,
-  setFilter,
-  setCurrentPage,
-} = mainSlice.actions;
+export const { setCharacters, setPageCount, setFilter, setCurrentPage } =
+  mainSlice.actions;
 export default mainSlice.reducer;
