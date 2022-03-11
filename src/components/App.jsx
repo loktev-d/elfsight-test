@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 
 import Filter from "./Filter";
 import CardGrid from "./CardGrid";
-import { actions } from "./sagas";
+import { actions } from "../redux/sagas";
 
 export default function App() {
   const dispatch = useDispatch();

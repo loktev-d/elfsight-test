@@ -11,8 +11,8 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setFilter } from "./mainSlice";
-import { actions } from "./sagas";
+import { setFilter } from "../redux/mainSlice";
+import { actions } from "../redux/sagas";
 
 const statusItems = [
   { name: "Any", value: "" },

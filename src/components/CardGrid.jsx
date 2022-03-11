@@ -6,8 +6,8 @@ import { useSelector, useDispatch } from "react-redux";
 
 import CharacterCard from "./CharacterCard";
 import CharacterInfoModal from "./CharacterInfoModal";
-import { actions } from "./sagas";
-import { setModalOpen } from "./mainSlice";
+import { actions } from "../redux/sagas";
+import { setModalOpen } from "../redux/mainSlice";
 
 export default function CardGrid() {
   const characters = useSelector((state) => state.main.characters);

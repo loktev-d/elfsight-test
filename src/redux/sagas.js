@@ -1,6 +1,6 @@
 import { call, put, takeLatest, all, select } from "redux-saga/effects";
 
-import * as api from "./api";
+import * as api from "../api";
 import { setCharacters, setPageCount, setCurrentPage } from "./mainSlice";
 
 const sagaTypes = {

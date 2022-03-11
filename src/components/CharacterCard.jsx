@@ -6,7 +6,7 @@ import { css, useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useDispatch } from "react-redux";
 
-import { setModalOpen, setSelectedCharacterId } from "./mainSlice";
+import { setModalOpen, setSelectedCharacterId } from "../redux/mainSlice";
 
 export default function CharacterCard({ name, imageUrl, gender, species, id }) {
   const theme = useTheme();
