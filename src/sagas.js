@@ -19,24 +19,37 @@ export const actions = {
 
 function* getCharacters() {
   const filter = yield select((state) => state.main.filter);
-  const res = yield call(api.fetchCharacters, filter);
 
-  yield put(
-    setCharactersAndPages({
-      characters: res.data.results.map((item) => ({
-        ...item,
-        origin: item.origin.name,
-        location: item.location.name,
-        episode: undefined,
-        url: undefined,
-        created: undefined,
-      })),
-      next: res.data.info.next,
-      prev: res.data.info.prev,
-    })
-  );
-  yield put(setPageCount(res.data.info.pages));
-  yield put(setCurrentPage(1));
+  try {
+    const res = yield call(api.fetchCharacters, filter);
+
+    yield put(
+      setCharactersAndPages({
+        characters: res.data.results.map((item) => ({
+          ...item,
+          origin: item.origin.name,
+          location: item.location.name,
+          episode: undefined,
+          url: undefined,
+          created: undefined,
+        })),
+        next: res.data.info.next,
+        prev: res.data.info.prev,
+      })
+    );
+    yield put(setPageCount(res.data.info.pages));
+    yield put(setCurrentPage(1));
+  } catch (err) {
+    yield put(
+      setCharactersAndPages({
+        characters: [],
+        next: "",
+        prev: "",
+      })
+    );
+    yield put(setPageCount(0));
+    yield put(setCurrentPage(0));
+  }
 }
 
 function* watchGetCharacters() {
