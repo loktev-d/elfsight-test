@@ -40,72 +40,74 @@ export default function Filter() {
 
   return (
     <Paper elevation={2} sx={{ p: 2 }}>
-      <Stack spacing={1}>
-        <Typography variant="h5" sx={{ lineHeight: 1 }}>
-          Filters
-        </Typography>
-        <Divider />
-        <Box sx={{ height: 1 }}></Box>
-        <TextField
-          label="Name"
-          name="name"
-          onChange={handleOnChange}
-          value={filter.name}
-        />
-        <FormControl>
-          <InputLabel id="status-label">Status</InputLabel>
-          <Select
-            name="status"
-            label="Status"
-            labelId="status-label"
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          dispatch(actions.getCharacters());
+        }}
+      >
+        <Stack spacing={1}>
+          <Typography variant="h5" sx={{ lineHeight: 1 }}>
+            Filters
+          </Typography>
+          <Divider />
+          <Box sx={{ height: 1 }}></Box>
+          <TextField
+            label="Name"
+            name="name"
             onChange={handleOnChange}
-            value={filter.status}
-          >
-            {statusItems.map((item, index) => (
-              <MenuItem key={index} value={item.value}>
-                {item.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <TextField
-          label="Species"
-          name="species"
-          onChange={handleOnChange}
-          value={filter.species}
-        />
-        <TextField
-          label="Type"
-          name="type"
-          onChange={handleOnChange}
-          value={filter.type}
-        />
-        <FormControl>
-          <InputLabel id="gender-label">Gender</InputLabel>
-          <Select
-            label="Gender"
-            labelId="gender-label"
-            name="gender"
+            value={filter.name}
+          />
+          <FormControl>
+            <InputLabel id="status-label">Status</InputLabel>
+            <Select
+              name="status"
+              label="Status"
+              labelId="status-label"
+              onChange={handleOnChange}
+              value={filter.status}
+            >
+              {statusItems.map((item, index) => (
+                <MenuItem key={index} value={item.value}>
+                  {item.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <TextField
+            label="Species"
+            name="species"
             onChange={handleOnChange}
-            value={filter.gender}
-          >
-            {genderItems.map((item, index) => (
-              <MenuItem key={index} value={item.value}>
-                {item.name}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-        <Box sx={{ height: 10 }}></Box>
-        <Button
-          variant="contained"
-          onClick={() => {
-            dispatch(actions.getCharacters());
-          }}
-        >
-          Filter
-        </Button>
-      </Stack>
+            value={filter.species}
+          />
+          <TextField
+            label="Type"
+            name="type"
+            onChange={handleOnChange}
+            value={filter.type}
+          />
+          <FormControl>
+            <InputLabel id="gender-label">Gender</InputLabel>
+            <Select
+              label="Gender"
+              labelId="gender-label"
+              name="gender"
+              onChange={handleOnChange}
+              value={filter.gender}
+            >
+              {genderItems.map((item, index) => (
+                <MenuItem key={index} value={item.value}>
+                  {item.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Box sx={{ height: 10 }}></Box>
+          <Button variant="contained" type="submit">
+            Filter
+          </Button>
+        </Stack>
+      </form>
     </Paper>
   );
 }
