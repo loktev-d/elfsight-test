@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import Filter from "./Filter";
+import CardGrid from "./CardGrid";
 import { actions } from "./sagas";
 
 export default function App() {
@@ -16,10 +17,12 @@ export default function App() {
   return (
     <Container maxWidth="lg" sx={{ pt: 2 }}>
       <Grid container spacing={2}>
-        <Grid item xs={3}>
+        <Grid item xs={12} md={3}>
           <Filter />
         </Grid>
-        <Grid item xs={9}></Grid>
+        <Grid item xs={12} md={9}>
+          <CardGrid />
+        </Grid>
       </Grid>
     </Container>
   );
