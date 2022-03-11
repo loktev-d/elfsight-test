@@ -12,7 +12,11 @@ export default function CharacterCard({ name, imageUrl, gender, species }) {
   return (
     <Card>
       <CardActionArea>
-        <CardMedia component="img" image={imageUrl} />
+        <CardMedia
+          component="img"
+          image={imageUrl}
+          sx={{ height: 276, backgroundColor: "gray" }}
+        />
         <CardHeader
           title={matches && name.length > 15 ? name.slice(0, 20) + "..." : name}
           subheader={`${species} - ${gender}`}
