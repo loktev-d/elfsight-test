@@ -5,12 +5,15 @@ import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
 
 import CharacterCard from "./CharacterCard";
+import CharacterInfoModal from "./CharacterInfoModal";
 import { actions } from "./sagas";
+import { setModalOpen } from "./mainSlice";
 
 export default function CardGrid() {
   const characters = useSelector((state) => state.main.characters);
   const pageCount = useSelector((state) => state.main.pageCount);
   const currentPage = useSelector((state) => state.main.currentPage);
+  const open = useSelector((state) => state.main.modalOpen);
 
   const dispatch = useDispatch();
 
@@ -27,6 +30,7 @@ export default function CardGrid() {
                   imageUrl={item.image}
                   gender={item.gender}
                   species={item.species}
+                  id={item.id}
                 />
               </Grid>
             ))}
@@ -39,6 +43,12 @@ export default function CardGrid() {
               onChange={(e, value) => dispatch(actions.getCharacters(value))}
             />
           </Box>
+          <CharacterInfoModal
+            open={open}
+            onClose={() => {
+              dispatch(setModalOpen(false));
+            }}
+          />
         </>
       ) : (
         <Box

@@ -11,6 +11,8 @@ const initialState = {
     type: "",
     gender: "",
   },
+  modalOpen: false,
+  selectedCharacterId: null,
 };
 
 const mainSlice = createSlice({
@@ -29,9 +31,21 @@ const mainSlice = createSlice({
     setCurrentPage: (state, { payload }) => {
       state.currentPage = payload;
     },
+    setModalOpen: (state, { payload }) => {
+      state.modalOpen = payload;
+    },
+    setSelectedCharacterId: (state, { payload }) => {
+      state.selectedCharacterId = payload;
+    },
   },
 });
 
-export const { setCharacters, setPageCount, setFilter, setCurrentPage } =
-  mainSlice.actions;
+export const {
+  setCharacters,
+  setPageCount,
+  setFilter,
+  setCurrentPage,
+  setModalOpen,
+  setSelectedCharacterId,
+} = mainSlice.actions;
 export default mainSlice.reducer;

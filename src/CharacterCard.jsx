@@ -4,14 +4,24 @@ import CardHeader from "@mui/material/CardHeader";
 import CardActionArea from "@mui/material/CardActionArea";
 import { css, useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { useDispatch } from "react-redux";
 
-export default function CharacterCard({ name, imageUrl, gender, species }) {
+import { setModalOpen, setSelectedCharacterId } from "./mainSlice";
+
+export default function CharacterCard({ name, imageUrl, gender, species, id }) {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up("lg"));
 
+  const dispatch = useDispatch();
+
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea
+        onClick={() => {
+          dispatch(setModalOpen(true));
+          dispatch(setSelectedCharacterId(id));
+        }}
+      >
         <CardMedia
           component="img"
           image={imageUrl}
